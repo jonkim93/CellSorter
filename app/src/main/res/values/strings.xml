@@ -9,4 +9,13 @@
     <string name="demo_min_label">Min</string>
     <string name="demo_max_label">Max</string>
 
+    <string name="edit_params_label">Edit Parameters</string>
+    <string name="adaptive_threshold_block_size_label">Threshold Block Size</string>
+    <string name="filter_cell_size_label">Cell Size</string>
+    <string name="erode_dilate_block_size_label">Erode/Dilate Block Size</string>
+    <string name="erode_dilate_iterations_label">Erode/Dilate Number of Iterations</string>
+    <string name="hue_range_label">Hue Range</string>
+    <string name="sat_range_label">Saturation Range</string>
+    <string name="val_range_label">Value Range</string>
+
 </resources>

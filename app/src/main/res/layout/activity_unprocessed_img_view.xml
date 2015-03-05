@@ -17,6 +17,7 @@
         android:layout_marginBottom="54dp"
         />
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,7 +33,7 @@
             android:textSize="30sp"
             android:gravity="center"
             android:textColor="#E6E6E6"
-            android:text="Edit Parameters"/>
+            android:text="@string/edit_params_label"/>
 
         <ToggleButton
             android:id="@+id/toggleButtonAdaptiveAbsolute"
@@ -45,22 +46,73 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:orientation="vertical"
             android:id="@+id/linearLayoutAdaptive">
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="0px"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Block Size"
-                    android:textColor="#E6E6E6"/>
+                    style="@style/baseWidgetTextView"
+                    android:text="@string/adaptive_threshold_block_size_label"/>
                 <SeekBar
+                    android:id="@+id/seekBarAdaptiveThresholdBlockSize"
                     android:layout_width="0px"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"/>
             </LinearLayout>
+
+            <View
+                style="@style/whiteHorizontalRule"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/baseWidgetTextView"
+                    android:text="@string/filter_cell_size_label"/>
+                <edu.berkeley.biomaterials.cellsorter.RangeSeekBar
+                    style="@style/baseWidgetRangeSeekBar"
+                    android:id="@+id/rangeSeekBarAdaptiveCellSize"
+                    rsb:absoluteMinValue="0"
+                    rsb:absoluteMaxValue="1000"/>
+            </LinearLayout>
+
+            <View
+                style="@style/whiteHorizontalRule"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/baseWidgetTextView"
+                    android:text="@string/erode_dilate_block_size_label"/>
+                <SeekBar
+                    android:id="@+id/seekBarAdaptiveErodeDilateBlockSize"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"/>
+            </LinearLayout>
+
+            <View
+                style="@style/whiteHorizontalRule"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/baseWidgetTextView"
+                    android:text="@string/erode_dilate_iterations_label"/>
+                <SeekBar
+                    android:id="@+id/seekBarAdaptiveErodeDilateIterations"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"/>
+            </LinearLayout>
+
         </LinearLayout>
 
 
@@ -76,18 +128,85 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="0px"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Hue Range"
-                    android:textColor="#E6E6E6"/>
+                    style="@style/baseWidgetTextView"
+                    android:text="@string/hue_range_label"/>
                 <edu.berkeley.biomaterials.cellsorter.RangeSeekBar
+                    style="@style/baseWidgetRangeSeekBar"
+                    android:id="@+id/rangeSeekBarHueRange"
+                    rsb:absoluteMinValue="0"
+                    rsb:absoluteMaxValue="255"/>
+            </LinearLayout>
+
+            <View
+                style="@style/whiteHorizontalRule"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/baseWidgetTextView"
+                    android:text="@string/sat_range_label"/>
+                <edu.berkeley.biomaterials.cellsorter.RangeSeekBar
+                    style="@style/baseWidgetRangeSeekBar"
+                    android:id="@+id/rangeSeekBarSatRange"
+                    rsb:absoluteMinValue="0"
+                    rsb:absoluteMaxValue="255"/>
+            </LinearLayout>
+
+            <View
+                style="@style/whiteHorizontalRule"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/baseWidgetTextView"
+                    android:text="@string/val_range_label"/>
+                <edu.berkeley.biomaterials.cellsorter.RangeSeekBar
+                    style="@style/baseWidgetRangeSeekBar"
+                    android:id="@+id/rangeSeekBarValRange"
+                    rsb:absoluteMinValue="0"
+                    rsb:absoluteMaxValue="255"/>
+            </LinearLayout>
+
+            <View
+                style="@style/whiteHorizontalRule"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/baseWidgetTextView"
+                    android:text="@string/filter_cell_size_label"/>
+                <edu.berkeley.biomaterials.cellsorter.RangeSeekBar
+                    style="@style/baseWidgetRangeSeekBar"
+                    android:id="@+id/rangeSeekBarAbsoluteCellSize"
+                    rsb:absoluteMinValue="0"
+                    rsb:absoluteMaxValue="1000"/>
+            </LinearLayout>
+
+            <View
+                style="@style/whiteHorizontalRule"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/baseWidgetTextView"
+                    android:text="@string/erode_dilate_block_size_label"/>
+                <SeekBar
+                    android:id="@+id/seekBarAbsoluteErodeDilateBlockSize"
                     android:layout_width="0px"
                     android:layout_height="wrap_content"
-                    rsb:absoluteMinValue="0"
-                    rsb:absoluteMaxValue="255"
                     android:layout_weight="3"/>
             </LinearLayout>
+
+            <View
+                style="@style/whiteHorizontalRule"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -97,31 +216,12 @@
                     android:layout_width="0px"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Saturation Range"
+                    android:text="@string/erode_dilate_iterations_label"
                     android:textColor="#E6E6E6"/>
-                <edu.berkeley.biomaterials.cellsorter.RangeSeekBar
+                <SeekBar
+                    android:id="@+id/seekBarAbsoluteErodeDilateIterations"
                     android:layout_width="0px"
                     android:layout_height="wrap_content"
-                    rsb:absoluteMinValue="0"
-                    rsb:absoluteMaxValue="255"
-                    android:layout_weight="3"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0px"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Value Range"
-                    android:textColor="#E6E6E6"/>
-                <edu.berkeley.biomaterials.cellsorter.RangeSeekBar
-                    android:layout_width="0px"
-                    android:layout_height="wrap_content"
-                    rsb:absoluteMinValue="0"
-                    rsb:absoluteMaxValue="255"
                     android:layout_weight="3"/>
             </LinearLayout>
         </LinearLayout>
