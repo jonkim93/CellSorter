@@ -1,0 +1,132 @@
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sliding_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    sothree:umanoPanelHeight="44dp"
+    sothree:umanoShadowHeight="4dp"
+    sothree:umanoOverlay="true">
+
+
+    <ImageView
+        android:id="@+id/img_view_unprocessed"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="54dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|top"
+        android:background="#44000000"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:textColor="#E6E6E6"
+            android:text="Edit Parameters"/>
+
+        <ToggleButton
+            android:id="@+id/toggleButtonAdaptiveAbsolute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOn="Adaptive"
+            android:textOff="Absolute"
+            android:onClick="toggleAdaptiveAbsolute"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/linearLayoutAdaptive">
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Block Size"
+                    android:textColor="#E6E6E6"/>
+                <SeekBar
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/linearLayoutAbsolute"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Hue Range"
+                    android:textColor="#E6E6E6"/>
+                <edu.berkeley.biomaterials.cellsorter.RangeSeekBar
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    rsb:absoluteMinValue="0"
+                    rsb:absoluteMaxValue="255"
+                    android:layout_weight="3"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Saturation Range"
+                    android:textColor="#E6E6E6"/>
+                <edu.berkeley.biomaterials.cellsorter.RangeSeekBar
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    rsb:absoluteMinValue="0"
+                    rsb:absoluteMaxValue="255"
+                    android:layout_weight="3"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Value Range"
+                    android:textColor="#E6E6E6"/>
+                <edu.berkeley.biomaterials.cellsorter.RangeSeekBar
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    rsb:absoluteMinValue="0"
+                    rsb:absoluteMaxValue="255"
+                    android:layout_weight="3"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

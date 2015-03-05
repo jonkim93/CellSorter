@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CellSorter</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_unprocessed_img_view">UnprocessedImgView</string>
+    <string name="title_activity_parameter_view">ParameterView</string>
+    <string name="demo_min_label">Min</string>
+    <string name="demo_max_label">Max</string>
+
+</resources>

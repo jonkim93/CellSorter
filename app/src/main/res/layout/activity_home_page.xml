@@ -1,0 +1,61 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        android:layout_gravity="center_vertical">
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/buttonProcess"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Process"
+            android:textSize="20sp"
+            android:gravity="left"
+            android:onClick="process"
+            bootstrapbutton:bb_type="primary"
+            bootstrapbutton:bb_icon_left="fa-camera"
+            bootstrapbutton:bb_size="large"
+            bootstrapbutton:bb_roundedCorners="true"
+            />
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/buttonParameters"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Parameters"
+            android:textSize="20sp"
+            android:gravity="left"
+            android:onClick="parameters"
+            bootstrapbutton:bb_type="primary"
+            bootstrapbutton:bb_icon_left="fa-tasks"
+            bootstrapbutton:bb_size="large"
+            bootstrapbutton:bb_roundedCorners="true"
+            />
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/buttonSettings"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Settings"
+            android:textSize="20sp"
+            android:gravity="left"
+            android:onClick="settings"
+            bootstrapbutton:bb_type="primary"
+            bootstrapbutton:bb_icon_left="fa-cog"
+            bootstrapbutton:bb_size="large"
+            bootstrapbutton:bb_roundedCorners="true"
+            />
+    </LinearLayout>
+
+</LinearLayout>
