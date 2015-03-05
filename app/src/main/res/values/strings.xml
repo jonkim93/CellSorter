@@ -18,4 +18,6 @@
     <string name="sat_range_label">Saturation Range</string>
     <string name="val_range_label">Value Range</string>
 
+    <string name="process_button">Process</string>
+
 </resources>

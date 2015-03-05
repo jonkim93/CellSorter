@@ -35,13 +35,48 @@
             android:textColor="#E6E6E6"
             android:text="@string/edit_params_label"/>
 
-        <ToggleButton
-            android:id="@+id/toggleButtonAdaptiveAbsolute"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textOn="Adaptive"
-            android:textOff="Absolute"
-            android:onClick="toggleAdaptiveAbsolute"/>
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <ToggleButton
+                android:id="@+id/toggleButtonAdaptiveAbsolute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="Adaptive"
+                android:textOff="Absolute"
+                android:onClick="toggleAdaptiveAbsolute"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButtonAutoRefresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="Auto Refresh On"
+                android:textOff="Auto Refresh Off"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/process_button"
+                android:onClick="refreshImage"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutProgressBar"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="fill_parent"

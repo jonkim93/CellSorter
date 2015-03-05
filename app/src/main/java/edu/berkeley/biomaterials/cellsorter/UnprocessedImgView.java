@@ -12,14 +12,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ToggleButton;
 
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 
-import org.opencv.core.Mat;
-import org.opencv.imgproc.*;
 import org.opencv.android.*;
 
 
@@ -162,49 +159,16 @@ public class UnprocessedImgView extends ActionBarActivity {
     private Bitmap processImage(ParamContainer p){
         Bitmap bm_image = getBitmapFromURI(imageURI);
         if (p.checkValid()) {
-            Mat mat_img = new Mat();
-            Utils.bitmapToMat(bm_image, mat_img);
-            Mat processed_mat_img = new Mat();
             if (p.isAdaptive()) {
-                Mat gray_img = new Mat();
-                Imgproc.cvtColor(mat_img, gray_img, Imgproc.COLOR_RGB2GRAY);
-                Imgproc.adaptiveThreshold(gray_img,    //src
-                        processed_mat_img,                //dst
-                        255.0,                         //maxValue
-                        Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C,//adaptiveMethod
-                        Imgproc.THRESH_BINARY,         //thresholdType
-                        p.adaptiveBlockSize,           //blockSize
-                        2.0);                          //C
-
-                Bitmap processed_bm_img = Bitmap.createBitmap(bm_image);
-                Utils.matToBitmap(processed_mat_img, processed_bm_img);
-                return processed_bm_img;
+                return ImgProcHelper.adaptiveProcessImage(p, bm_image);
             } else {
-                //Imgproc.
-                return bm_image; // TODO need to change this!!
+                return ImgProcHelper.absoluteProcessImage(p, bm_image);
             }
         } else {
             Log.w("INVALID IMAGE", "INVALID IMAGE");
             return bm_image;
         }
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initializeOpenCV();
-        setContentView(R.layout.activity_unprocessed_img_view);
-        initializeAdaptiveAbsoluteViews(absoluteInvisible);
-        initializeRangeSeekBars();
-
-        Intent intent = getIntent();
-        imageURI = Uri.parse(intent.getStringExtra("image_uri"));
-        Bitmap bm_img = getBitmapFromURI(imageURI);
-        ImageView imgView = (ImageView) findViewById(R.id.img_view_unprocessed);
-        imgView.setImageBitmap(bm_img);
-    }
-
-
 
     private ParamContainer getParams(){
         if (!absoluteInvisible){
@@ -229,12 +193,38 @@ public class UnprocessedImgView extends ActionBarActivity {
         }
     }
 
-    public void refreshImage(){
-        Log.w("refresh", "refresh method called");
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initializeOpenCV();
+        setContentView(R.layout.activity_unprocessed_img_view);
+        initializeAdaptiveAbsoluteViews(absoluteInvisible);
+        initializeRangeSeekBars();
+
+        Intent intent = getIntent();
+        imageURI = Uri.parse(intent.getStringExtra("image_uri"));
+        Bitmap bm_img = getBitmapFromURI(imageURI);
         ImageView imgView = (ImageView) findViewById(R.id.img_view_unprocessed);
-        imgView.setImageBitmap(processImage(getParams()));
+        imgView.setImageBitmap(bm_img);
     }
 
+    public void refreshImage(){
+        if (((ToggleButton) (findViewById(R.id.toggleButtonAutoRefresh))).isChecked()) {
+            Log.w("refresh", "refresh method called");
+            (findViewById(R.id.linearLayoutProgressBar)).setVisibility(View.VISIBLE);
+            ImageView imgView = (ImageView) findViewById(R.id.img_view_unprocessed);
+            imgView.setImageBitmap(processImage(getParams()));
+            (findViewById(R.id.linearLayoutProgressBar)).setVisibility(View.GONE);
+        }
+    }
+
+    public void refreshImage(View v){
+        Log.w("refresh", "refresh method called");
+        (findViewById(R.id.linearLayoutProgressBar)).setVisibility(View.VISIBLE);
+        ImageView imgView = (ImageView) findViewById(R.id.img_view_unprocessed);
+        imgView.setImageBitmap(processImage(getParams()));
+        (findViewById(R.id.linearLayoutProgressBar)).setVisibility(View.GONE);
+    }
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
