@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="bottom"
+    android:background="#4D4D4D"
     sothree:umanoPanelHeight="44dp"
     sothree:umanoShadowHeight="4dp"
     sothree:umanoOverlay="true">
@@ -68,8 +69,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:orientation="vertical">
             <ProgressBar
                 android:id="@+id/progress_bar"
                 style="?android:attr/progressBarStyleLarge"

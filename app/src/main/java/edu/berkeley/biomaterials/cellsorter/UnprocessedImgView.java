@@ -1,9 +1,11 @@
 package edu.berkeley.biomaterials.cellsorter;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.ParcelFileDescriptor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
 import java.io.FileDescriptor;
@@ -200,6 +203,8 @@ public class UnprocessedImgView extends ActionBarActivity {
         setContentView(R.layout.activity_unprocessed_img_view);
         initializeAdaptiveAbsoluteViews(absoluteInvisible);
         initializeRangeSeekBars();
+        //make sure progress bar is invisible
+        (findViewById(R.id.linearLayoutProgressBar)).setVisibility(View.GONE);
 
         Intent intent = getIntent();
         imageURI = Uri.parse(intent.getStringExtra("image_uri"));
@@ -210,20 +215,30 @@ public class UnprocessedImgView extends ActionBarActivity {
 
     public void refreshImage(){
         if (((ToggleButton) (findViewById(R.id.toggleButtonAutoRefresh))).isChecked()) {
-            Log.w("refresh", "refresh method called");
-            (findViewById(R.id.linearLayoutProgressBar)).setVisibility(View.VISIBLE);
+            Log.w("refresh", "refresh method (no args) called");
+            /**
             ImageView imgView = (ImageView) findViewById(R.id.img_view_unprocessed);
-            imgView.setImageBitmap(processImage(getParams()));
-            (findViewById(R.id.linearLayoutProgressBar)).setVisibility(View.GONE);
+            try {
+                Bitmap result_image = (new ProcessImage()).execute().get();
+                imgView.setImageBitmap(result_image);
+            } catch (Exception e){
+                Log.w("CONCURRENCY", e.toString());
+            }
+             **/
+            (new ProcessImage()).execute();
         }
     }
 
     public void refreshImage(View v){
-        Log.w("refresh", "refresh method called");
-        (findViewById(R.id.linearLayoutProgressBar)).setVisibility(View.VISIBLE);
-        ImageView imgView = (ImageView) findViewById(R.id.img_view_unprocessed);
-        imgView.setImageBitmap(processImage(getParams()));
-        (findViewById(R.id.linearLayoutProgressBar)).setVisibility(View.GONE);
+        Log.w("refresh", "refresh method (view v) called");
+        /**ImageView imgView = (ImageView) findViewById(R.id.img_view_unprocessed);
+        try {
+            Bitmap result_image = (new ProcessImage()).execute().get();
+            imgView.setImageBitmap(result_image);
+        } catch (Exception e){
+            Log.w("CONCURRENCY", e.toString());
+        }**/
+        (new ProcessImage()).execute();
     }
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
@@ -280,5 +295,36 @@ public class UnprocessedImgView extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private class ProcessImage extends AsyncTask<Void, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(Void... nothings) {
+            return processImage(getParams());
+            //return processImage(getParams());
+        }
+
+        @Override
+        protected void onPreExecute(){
+            Log.w("PreExecute", "In preexecute method");
+            (findViewById(R.id.linearLayoutProgressBar)).setVisibility(View.VISIBLE);
+            (findViewById(R.id.linearLayoutAdaptive)).setVisibility(View.GONE);
+            (findViewById(R.id.linearLayoutAbsolute)).setVisibility(View.GONE);
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            Log.w("PostExecute", "In postexecute method");
+            (findViewById(R.id.linearLayoutProgressBar)).setVisibility(View.GONE);
+            if (absoluteInvisible){
+                (findViewById(R.id.linearLayoutAdaptive)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.linearLayoutAbsolute)).setVisibility(View.GONE);
+            } else {
+                (findViewById(R.id.linearLayoutAdaptive)).setVisibility(View.GONE);
+                (findViewById(R.id.linearLayoutAbsolute)).setVisibility(View.VISIBLE);
+            }
+            ((ImageView) findViewById(R.id.img_view_unprocessed)).setImageBitmap(result);
+        }
     }
 }
