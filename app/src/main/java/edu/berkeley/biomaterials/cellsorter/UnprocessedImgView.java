@@ -27,6 +27,7 @@ public class UnprocessedImgView extends ActionBarActivity {
 
     private boolean absoluteInvisible = false;
     private Uri imageURI;
+    private Bitmap original;
 
     private void initializeOpenCV(){
         if (!OpenCVLoader.initDebug()) {
@@ -205,12 +206,13 @@ public class UnprocessedImgView extends ActionBarActivity {
         initializeRangeSeekBars();
         //make sure progress bar is invisible
         (findViewById(R.id.linearLayoutProgressBar)).setVisibility(View.GONE);
+        (findViewById(R.id.img_view_processed)).setVisibility(View.GONE);
 
         Intent intent = getIntent();
         imageURI = Uri.parse(intent.getStringExtra("image_uri"));
-        Bitmap bm_img = getBitmapFromURI(imageURI);
+        original = getBitmapFromURI(imageURI);
         ImageView imgView = (ImageView) findViewById(R.id.img_view_unprocessed);
-        imgView.setImageBitmap(bm_img);
+        imgView.setImageBitmap(original);
     }
 
     public void refreshImage(){
@@ -325,6 +327,11 @@ public class UnprocessedImgView extends ActionBarActivity {
                 (findViewById(R.id.linearLayoutAbsolute)).setVisibility(View.VISIBLE);
             }
             ((ImageView) findViewById(R.id.img_view_unprocessed)).setImageBitmap(result);
+            ImageView processed_view = ((ImageView) findViewById(R.id.img_view_processed));
+            processed_view.setVisibility(View.VISIBLE);
+            processed_view.setImageBitmap(original);
+            processed_view.setAlpha(0.5f);
+            processed_view.bringToFront();
         }
     }
 }

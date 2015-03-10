@@ -11,12 +11,21 @@
     sothree:umanoOverlay="true">
 
 
-    <ImageView
-        android:id="@+id/img_view_unprocessed"
+    <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginBottom="54dp"
-        />
+        android:layout_marginBottom="54dp">
+        <ImageView
+            android:id="@+id/img_view_unprocessed"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+        <ImageView
+            android:id="@+id/img_view_processed"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+    </FrameLayout>
+
 
 
     <LinearLayout
