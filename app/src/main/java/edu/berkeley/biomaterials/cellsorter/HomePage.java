@@ -42,24 +42,8 @@ public class HomePage extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void process(View view){
-        Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        photoPickerIntent.setType("image/*");
-        startActivityForResult(photoPickerIntent, 1);
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            Log.d("image picker", "result ok");
-            Uri imageURI = data.getData();
-            Intent intent = new Intent(this, UnprocessedImgView.class);
-            intent.putExtra("image_uri", imageURI.toString());
-            startActivity(intent);
-        } else {
-            Log.d("image picker", "result not ok");
-        }
+    public void pickImage(View view){
+        startActivity(new Intent(this, ImagePicker.class));
     }
 
     public void parameters(View view){

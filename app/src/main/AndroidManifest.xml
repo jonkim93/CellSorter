@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.berkeley.biomaterials.cellsorter" >
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -23,6 +28,10 @@
         <activity
             android:name=".ParametersView"
             android:label="@string/title_activity_parameter_view" >
+        </activity>
+        <activity
+            android:name=".ImagePicker"
+            android:label="@string/title_activity_image_picker" >
         </activity>
     </application>
 

@@ -20,7 +20,7 @@
             android:text="Process"
             android:textSize="20sp"
             android:gravity="left"
-            android:onClick="process"
+            android:onClick="pickImage"
             bootstrapbutton:bb_type="primary"
             bootstrapbutton:bb_icon_left="fa-camera"
             bootstrapbutton:bb_size="large"

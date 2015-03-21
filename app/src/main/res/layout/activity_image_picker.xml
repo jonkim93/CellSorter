@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="edu.berkeley.biomaterials.cellsorter.ImagePicker">
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/buttonProcess"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Take New Image"
+        android:textSize="20sp"
+        android:gravity="left"
+        android:onClick="takeNewImage"
+        bootstrapbutton:bb_type="primary"
+        bootstrapbutton:bb_icon_left="fa-camera"
+        bootstrapbutton:bb_size="large"
+        bootstrapbutton:bb_roundedCorners="true"
+        />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/buttonParameters"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Choose Existing Image"
+        android:textSize="20sp"
+        android:gravity="left"
+        android:onClick="chooseExistingImage"
+        bootstrapbutton:bb_type="primary"
+        bootstrapbutton:bb_icon_left="fa-file-image-o"
+        bootstrapbutton:bb_size="large"
+        bootstrapbutton:bb_roundedCorners="true"
+        />
+
+</LinearLayout>

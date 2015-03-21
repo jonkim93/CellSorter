@@ -209,8 +209,10 @@ public class UnprocessedImgView extends ActionBarActivity {
         (findViewById(R.id.img_view_processed)).setVisibility(View.GONE);
 
         Intent intent = getIntent();
-        imageURI = Uri.parse(intent.getStringExtra("image_uri"));
-        original = getBitmapFromURI(imageURI);
+        if (intent.hasExtra("image_uri")) {
+            imageURI = Uri.parse(intent.getStringExtra("image_uri"));
+            original = getBitmapFromURI(imageURI);
+        }
         ImageView imgView = (ImageView) findViewById(R.id.img_view_unprocessed);
         imgView.setImageBitmap(original);
     }
@@ -268,6 +270,10 @@ public class UnprocessedImgView extends ActionBarActivity {
             (findViewById(R.id.linearLayoutAdaptive)).setVisibility(View.GONE);
             (findViewById(R.id.linearLayoutAbsolute)).setVisibility(View.VISIBLE);
         }
+    }
+
+    public void process(View view){
+
     }
 
     @Override

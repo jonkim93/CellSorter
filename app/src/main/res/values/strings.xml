@@ -8,7 +8,6 @@
     <string name="title_activity_parameter_view">ParameterView</string>
     <string name="demo_min_label">Min</string>
     <string name="demo_max_label">Max</string>
-
     <string name="edit_params_label">Edit Parameters</string>
     <string name="adaptive_threshold_block_size_label">Threshold Block Size</string>
     <string name="filter_cell_size_label">Cell Size</string>
@@ -17,7 +16,8 @@
     <string name="hue_range_label">Hue Range</string>
     <string name="sat_range_label">Saturation Range</string>
     <string name="val_range_label">Value Range</string>
-
     <string name="process_button">Process</string>
+    <string name="preview_button">Preview</string>
+    <string name="title_activity_image_picker">ImagePicker</string>
 
 </resources>
