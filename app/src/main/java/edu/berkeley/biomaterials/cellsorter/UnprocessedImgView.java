@@ -19,6 +19,7 @@ import android.widget.ToggleButton;
 
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import org.opencv.android.*;
 
@@ -27,6 +28,7 @@ public class UnprocessedImgView extends ActionBarActivity {
 
     private boolean absoluteInvisible = false;
     private Uri imageURI;
+    private ArrayList<Uri> imageURIs;
     private Bitmap original;
 
     private void initializeOpenCV(){
@@ -209,8 +211,8 @@ public class UnprocessedImgView extends ActionBarActivity {
         (findViewById(R.id.img_view_processed)).setVisibility(View.GONE);
 
         Intent intent = getIntent();
-        if (intent.hasExtra("image_uri")) {
-            imageURI = Uri.parse(intent.getStringExtra("image_uri"));
+        if (intent.hasExtra("uris")) {
+            imageURIs = intent.getParcelableArrayListExtra("uris");
             original = getBitmapFromURI(imageURI);
         }
         ImageView imgView = (ImageView) findViewById(R.id.img_view_unprocessed);

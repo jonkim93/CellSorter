@@ -1,10 +1,12 @@
 package edu.berkeley.biomaterials.cellsorter;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import java.io.File;
+import java.util.ArrayList;
 
 
 public class ImagePicker extends ActionBarActivity {
@@ -77,6 +80,7 @@ public class ImagePicker extends ActionBarActivity {
     public void chooseExistingImage(View view){
         Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
         photoPickerIntent.setType("image/*");
+        photoPickerIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(photoPickerIntent, REQUEST_IMAGE_SELECT);
     }
 
@@ -84,9 +88,14 @@ public class ImagePicker extends ActionBarActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_SELECT && resultCode == Activity.RESULT_OK) {
             Log.d("image picker", "result ok");
-            image_uri = data.getData().toString();
+            ClipData clipDataItems = data.getClipData();
+            ArrayList<Uri> uris = new ArrayList<>();
+            for (int i=0; i < clipDataItems.getItemCount(); i++){
+                ClipData.Item item = clipDataItems.getItemAt(i);
+                uris.add(item.getUri());
+            }
             Intent intent = new Intent(this, UnprocessedImgView.class);
-            intent.putExtra("image_uri", image_uri);
+            intent.putParcelableArrayListExtra("uris", uris);
             startActivity(intent);
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
             Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
