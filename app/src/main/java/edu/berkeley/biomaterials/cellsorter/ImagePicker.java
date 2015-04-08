@@ -94,7 +94,7 @@ public class ImagePicker extends ActionBarActivity {
                 ClipData.Item item = clipDataItems.getItemAt(i);
                 uris.add(item.getUri());
             }
-            Intent intent = new Intent(this, UnprocessedImgView.class);
+            Intent intent = new Intent(this, ScreenSlidePagerActivity.class);
             intent.putParcelableArrayListExtra("uris", uris);
             startActivity(intent);
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){

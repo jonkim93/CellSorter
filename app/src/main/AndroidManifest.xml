@@ -33,6 +33,10 @@
             android:name=".ImagePicker"
             android:label="@string/title_activity_image_picker" >
         </activity>
+        <activity
+            android:name=".ScreenSlidePagerActivity"
+            android:label="screen_slide_pager_activity" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,6 +1,11 @@
 package edu.berkeley.biomaterials.cellsorter;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.ParcelFileDescriptor;
+import android.util.Log;
 
 import org.opencv.android.Utils;
 import org.opencv.core.Core;
@@ -10,10 +15,26 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
+import java.io.FileDescriptor;
+import java.io.FileNotFoundException;
+
 /**
  * Created by Jon on 3/5/15.
  */
 public class ImgProcHelper {
+
+    public static Bitmap getBitmapFromURI(Uri image_uri, Context context){
+        try {
+            ParcelFileDescriptor parcelFileDescriptor = context.getContentResolver().openFileDescriptor(image_uri, "r");
+            FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+            Bitmap bm_image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+            return bm_image;
+        } catch (FileNotFoundException f) {
+            Log.e("error", "FILE NOT FOUND");
+            Bitmap.Config conf = Bitmap.Config.ARGB_8888;
+            return Bitmap.createBitmap(800,800,conf); //TODO: don't hardcode the empty bitmap's dimensions
+        }
+    }
 
     public static Mat ErodeDilate(int ksize, int iterations, Mat img){
         for (int i=0; i<iterations; i++) {
