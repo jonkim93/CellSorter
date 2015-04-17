@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="edu.berkeley.biomaterials.cellsorter.ImagePicker">
+    tools:context="edu.berkeley.biomaterials.cellsorter.ActivityImagePicker">
 
     <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/buttonProcess"

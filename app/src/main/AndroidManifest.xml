@@ -3,8 +3,10 @@
     package="edu.berkeley.biomaterials.cellsorter" >
 
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -13,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
         <activity
-            android:name=".HomePage"
+            android:name=".ActivityHome"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,16 +28,24 @@
             android:label="@string/title_activity_unprocessed_img_view" >
         </activity>
         <activity
-            android:name=".ParametersView"
+            android:name=".ActivityParameters"
             android:label="@string/title_activity_parameter_view" >
         </activity>
         <activity
-            android:name=".ImagePicker"
+            android:name=".ActivityImagePicker"
             android:label="@string/title_activity_image_picker" >
         </activity>
         <activity
-            android:name=".ScreenSlidePagerActivity"
+            android:name=".ActivityPreview"
             android:label="screen_slide_pager_activity" >
+        </activity>
+        <activity
+            android:name=".ActivityResults"
+            android:label="@string/title_activity_activity_results" >
+        </activity>
+        <activity
+            android:name=".ActivitySubdivide"
+            android:label="@string/title_activity_activity_subdivide" >
         </activity>
     </application>
 

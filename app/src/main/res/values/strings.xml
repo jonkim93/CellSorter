@@ -19,5 +19,7 @@
     <string name="process_button">Process</string>
     <string name="preview_button">Preview</string>
     <string name="title_activity_image_picker">ImagePicker</string>
+    <string name="title_activity_activity_results">ActivityResults</string>
+    <string name="title_activity_activity_subdivide">ActivitySubdivide</string>
 
 </resources>
