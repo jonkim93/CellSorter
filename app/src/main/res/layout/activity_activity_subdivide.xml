@@ -1,14 +1,45 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="#000"
+    android:orientation="vertical"
     tools:context="edu.berkeley.biomaterials.cellsorter.ActivitySubdivide">
 
     <ImageView
         android:id="@+id/imageview_subdivide"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="7"/>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Preview"
+            android:onClick="preview"/>
+
+        <edu.berkeley.biomaterials.cellsorter.customUIElements.RangeSeekBar
+            style="@style/baseWidgetRangeSeekBar"
+            android:id="@+id/subdivide_rangeseekbar"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            rsb:absoluteMinValue="1"
+            rsb:absoluteMaxValue="4"
+            rsb:singleThumb="true"/>
+
+        </LinearLayout>
+
+
+</LinearLayout>

@@ -42,6 +42,33 @@ public class ImgProcHelper {
         }
     }
 
+    public static Bitmap[] subdivideBitmap(Bitmap im, int increment){
+        Bitmap[] results = new Bitmap[increment*increment];
+        Mat mat_img = new Mat();
+        Utils.bitmapToMat(im, mat_img);
+        int width = mat_img.width();
+        int height = mat_img.height();
+        int grid_width = width/increment;
+        int grid_height = height/increment;
+        for (int x=0; x<increment; x++){
+            for (int y=0;y<increment; y++){
+                int row_start = x*grid_width;
+                int col_start = y*grid_height;
+                int row_end = (x+1)*grid_width;//-1;
+                int col_end = (y+1)*grid_height;//-1;
+                Bitmap tmp = Bitmap.createBitmap(im, row_start, col_start, row_end - row_start, col_end - col_start);
+                Mat sub_img = mat_img.submat(col_start, col_end, row_start, row_end);
+                Log.w("TMP HEIGHT: ", Integer.toString(tmp.getHeight()));
+                Log.w("TMP WIDTH : ", Integer.toString(tmp.getWidth()));
+                Log.w("SUB_IMG HEIGHT : ", Integer.toString(sub_img.height()));
+                Log.w("SUB_IMG WIDTH  : ", Integer.toString(sub_img.width()));
+                Utils.matToBitmap(sub_img, tmp);
+                results[x*increment+y] = tmp;
+            }
+        }
+        return results;
+    }
+
     public static int countBlobs(Bitmap binaryMask){
         Mat mat_img = new Mat();
         Utils.bitmapToMat(binaryMask, mat_img);

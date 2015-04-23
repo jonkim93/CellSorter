@@ -39,11 +39,7 @@ public class ActivityPreview extends FragmentActivity {
     private ArrayList<Uri> imageURIs;
     private HashMap<Integer, Fragment> fragmentMap;
 
-    private void initializeOpenCV(){
-        if (!OpenCVLoader.initDebug()) {
-            Log.e("Error", "Initialization Error");
-        }
-    }
+
 
     private void initializeAdaptiveAbsoluteViews(boolean absoluteIsInvisible){
         if (absoluteIsInvisible) {
@@ -253,7 +249,7 @@ public class ActivityPreview extends FragmentActivity {
         imageURIs = intent.getParcelableArrayListExtra("uris");
 
         // set up openCV
-        initializeOpenCV();
+        //initializeOpenCV();
 
         // set up other views
         initializeAdaptiveAbsoluteViews(absoluteInvisible);

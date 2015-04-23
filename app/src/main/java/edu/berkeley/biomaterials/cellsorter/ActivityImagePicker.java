@@ -96,14 +96,14 @@ public class ActivityImagePicker extends ActionBarActivity {
             } else {
                 uris.add(data.getData());
             }
-            Intent intent = new Intent(this, ActivityPreview.class);
+            Intent intent = new Intent(this, ActivitySubdivide.class);
             intent.putParcelableArrayListExtra("uris", uris);
             startActivity(intent);
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
             Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
             mediaScanIntent.setData(Uri.parse(image_uri));
             this.sendBroadcast(mediaScanIntent);
-            Intent intent = new Intent(this, ActivityPreview.class);
+            Intent intent = new Intent(this, ActivitySubdivide.class);
             intent.putExtra("image_uri", image_uri);
             startActivity(intent);
         } else {
