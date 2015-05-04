@@ -16,6 +16,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ToggleButton;
+import edu.berkeley.biomaterials.cellsorter.customUIElements.*;
+import edu.berkeley.biomaterials.cellsorter.customDataStructures.*;
+import edu.berkeley.biomaterials.cellsorter.helperMethods.*;
+
 
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;

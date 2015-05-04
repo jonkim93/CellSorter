@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
+import android.text.format.Time;
 import android.util.Log;
 
 import org.opencv.android.Utils;
@@ -18,7 +19,10 @@ import org.opencv.imgproc.Imgproc;
 
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import edu.berkeley.biomaterials.cellsorter.customDataStructures.ImageCountContainer;
@@ -28,6 +32,14 @@ import edu.berkeley.biomaterials.cellsorter.customDataStructures.ParamContainer;
  * Created by Jon on 3/5/15.
  */
 public class ImgProcHelper {
+
+    public static String generateFileName(){
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy_MM_dd_HHmmss");//dd/MM/yyyy
+        Date now = new Date();
+        String name = sdfDate.format(now);
+        name += ".jpg";
+        return name;
+    }
 
     public static Bitmap getBitmapFromURI(Uri image_uri, Context context){
         try {

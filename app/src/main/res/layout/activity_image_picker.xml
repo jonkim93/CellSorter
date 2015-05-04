@@ -40,4 +40,18 @@
         bootstrapbutton:bb_roundedCorners="true"
         />
 
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/buttonFolders"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Choose Existing Folder"
+        android:textSize="20sp"
+        android:gravity="left"
+        bootstrapbutton:bb_type="primary"
+        bootstrapbutton:bb_icon_left="fa-folder"
+        bootstrapbutton:bb_size="large"
+        bootstrapbutton:bb_roundedCorners="true"
+        />
+
 </LinearLayout>

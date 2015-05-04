@@ -36,11 +36,15 @@ public class ActivityResults extends ListActivity {
     private ArrayList<Uri> uris;
     private int current_index = 0;
     private ResultListAdapter result_list_adapter;
+    private int final_total = 0;
 
     private void startNextProcessTask(){
         if (current_index < uris.size()){
             new ProcessImageTask().execute(current_index);
             current_index++;
+        } else {
+            TextView t = (TextView) findViewById(R.id.textview_total_count);
+            t.setText(Integer.toString(final_total));
         }
     }
 
@@ -104,6 +108,7 @@ public class ActivityResults extends ListActivity {
             TextView t = (TextView) current_list_item.findViewById(R.id.textview_result_count);
             t.setVisibility(View.VISIBLE);
             t.setText(Integer.toString(result.count));
+            final_total += result.count;
             startNextProcessTask();
         }
     }

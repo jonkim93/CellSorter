@@ -1,8 +1,12 @@
 package edu.berkeley.biomaterials.cellsorter;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,10 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 
 import org.opencv.android.OpenCVLoader;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -24,9 +30,13 @@ import edu.berkeley.biomaterials.cellsorter.helperMethods.ImgProcHelper;
 
 public class ActivitySubdivide extends ActionBarActivity {
 
-    ArrayList<Uri> uris;
+    ArrayList<Uri> uris = new ArrayList<>();
     RangeSeekBar seekbar;
     ImageView image;
+    NumberPicker np;
+    private final int REQUEST_IMAGE_CAPTURE = 1;
+    private String image_uri;
+    private String folder_name = "";
 
     private void initializeOpenCV(){
         if (!OpenCVLoader.initDebug()) {
@@ -34,14 +44,48 @@ public class ActivitySubdivide extends ActionBarActivity {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_activity_subdivide);
+    private void startPhotoIntent(){
+        File photo;
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        String filename = ImgProcHelper.generateFileName();
+        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+            File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/" + folder_name);
+            if (!dir.exists()){
+                dir.mkdirs();
+            }
+            photo = new File(dir, filename);
+        } else {
+            photo = new File(getCacheDir(), filename);
+        }
+        if (photo != null) {
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
+            image_uri = Uri.fromFile(photo).toString();
+            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
 
+    private void showTakeAnotherPictureDialog(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Take another image?");
+        alert.setMessage("Would you like to take another image?");
+        // Set an EditText view to get user input
+        //final EditText input = new EditText(this);
+        //alert.setView(input);
+        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                startPhotoIntent();
+            }
+        });
+        alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                initialize();
+            }
+        });
+        alert.show();
+    }
+
+    private void initialize(){
         initializeOpenCV();
-
-        uris = getIntent().getParcelableArrayListExtra("uris");
         Bitmap bm = ImgProcHelper.getBitmapFromURI(uris.get(0), getApplicationContext());
         image = ((ImageView) findViewById(R.id.imageview_subdivide));
         image.setImageBitmap(bm);
@@ -52,6 +96,18 @@ public class ActivitySubdivide extends ActionBarActivity {
                 updateGrid((Integer) maxValue);
             }
         });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_activity_subdivide);
+        uris = getIntent().getParcelableArrayListExtra("uris");
+        folder_name = getIntent().getStringExtra("folder_name");
+        if (getIntent().getStringExtra("sourceActivity").equals("imagePicker")) {
+            showTakeAnotherPictureDialog();
+        }
+
     }
 
     public void preview(View v){
@@ -112,5 +168,18 @@ public class ActivitySubdivide extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
+            Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            mediaScanIntent.setData(Uri.parse(image_uri));
+            this.sendBroadcast(mediaScanIntent);
+            uris.add(Uri.parse(image_uri));
+            showTakeAnotherPictureDialog();
+        } else {
+            Log.d("image picker", "result not ok");
+        }
     }
 }
